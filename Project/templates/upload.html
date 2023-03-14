@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}
+Upload database
+{% endblock %}
+{% block content %}
+
+<div class="text-center mx-5">
+    <div>
+        <p>Upload a database previously downloaded. Be sure nothing was changed in the file, otherwise upload could not working as expected.</p>
+    </div>
+    <form action="{{ url_for('upload_db') }}" method="post" enctype="multipart/form-data">
+        <div class="input-group my-5 w-50 mx-auto">
+            <input type="file" class="form-control form-control-dark" id="inputGroupFile" name="database" aria-describedby="inputGroupFileAddon" aria-label="Upload">
+            <button class="btn btn-dark" type="submit" id="inputGroupFileAddon">Import</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}
+Delete
+{% endblock %}
+{% block content %}
+
+<div class="text-center mx-5">
+    <div>
+        <p>No data is stored after deletion, be sure to download it before.</p>
+        <p>Confirm you want to delete the database:</p>
+    </div>
+    <form action="{{ url_for('delete_db') }}" method="post">
+        <div class="form-check form-check-inline">
+            <input type="radio" name="answer" id="yes" value="yes" class="form-check-input">
+            <label for="yes" class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="answer" id="no" value="no" class="form-check-input">
+            <label for="no" class="form-check-label">No</label>
+        </div>
+        <button class="btn btn-dark" type="submit">Confirm deletion of database</button>
+    </form>
+</div>
+
+{% endblock %}

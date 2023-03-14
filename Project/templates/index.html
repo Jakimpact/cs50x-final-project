@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<div class="border-bottom border-dark text-start mx-5">
+    <p>
+        One of the special features of crypto assets is the wide variety of way you can buy them, but also hold them.
+        Whether you use an exchange, a web-based or a physical wallet, 
+        it is sometimes difficult to keep track of all these assets spread over these services allowing for their conservation.
+    </p>
+    <p>
+        The objective of this site is to provide you a tool to create a database of the different crypto assets you own, 
+        allowing a global vision on them.
+        Once created, you will be able to visualize your assets in various tables offering statistics on them but also your overall portfolio.        
+    </p>
+    <p>
+        For security sake, no personal data is requested. 
+        So be sure to download your database and store it on your PC, 
+        otherwise you won't find it back when connecting to the site later.<br>
+        Finally, you can import this database to update it or check the tables.
+    </p>
+</div>
+
+<div id="carouselDark" class="carousel carousel-dark slide m-5">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="static/img/update.PNG" class="d-block w-100" alt="Update example">
+    </div>
+    <div class="carousel-item">
+      <img src="static/img/table.PNG" class="img-fluid d-block" alt="Table example">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselDark" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselDark" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+{% endblock %}

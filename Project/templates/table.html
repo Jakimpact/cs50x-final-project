@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% block title %}
+Tables
+{% endblock %}
+{% block content %}
+
+<script src="static/myScript.js"></script>
+
+<div class="text-center mx-5 mb-5">
+    <h4 class="text-start pb-2"><span class=text-decoration-underline>Assets table</span>
+        <span class="text-muted"> - raw (click headers to sort the table)</span></h4>
+    <table class="table table-hover table-bordered table-striped" id="table1">
+        <thead class="table-dark">
+            <tr>
+                <th onclick="sortTable1(0)">Cryptocurrency</th>
+                <th onclick="sortTable1(1)">Quantity</th>
+                <th onclick="sortTable1(2)">Purchase Date</th>
+                <th onclick="sortTable1(3)">Service</th>
+                <th onclick="sortTable1(4)">$ Purchase value</th>
+                <th onclick="sortTable1(5)">$ Current value</th>
+                <th onclick="sortTable1(6)">$ Gain</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in db %}
+            <tr>
+                <td value="{{ quote['data'][row.coin][0]['name'] }}"><img src="{{ info['data'][row.coin][0]['logo'] }}" alt="logo" style="width: 24px;height: 24px;">
+                    <span><strong> {{ quote["data"][row.coin][0]["name"] }}</strong></span><span class="text-muted">  {{ row.coin }}</span></td>
+                <td value="{{ row.quantity }}">{{ row.quantity }}</td>
+                <td value="{{ row.date }}">{{ row.date }}</td>
+                <td value="{{ row.service }}">{{ row.service }}</td>
+                <td value="{{ row.price }}">{{ row.price | usd }}</td>
+                <td value="{{ (row.quantity * quote['data'][row.coin][0]['quote']['USD']['price']) }}">
+                    {{ (row.quantity * quote["data"][row.coin][0]["quote"]["USD"]["price"]) | usd }}</td>
+                <td class="gain" value="{{ ((row.quantity * quote['data'][row.coin][0]['quote']['USD']['price']) - row.price) }}">
+                    <strong>{{ ((row.quantity * quote["data"][row.coin][0]["quote"]["USD"]["price"]) - row.price) | usd }}</strong></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="text-center mx-5 mt-5">
+    <h4 class="text-start pb-2"><span class=text-decoration-underline>Assets table</span>
+        <span class="text-muted"> - summed (click headers to sort the table)</span></h4>
+    <table class="table table-hover table-bordered table-striped" id="table2">
+        <thead class="table-dark">
+            <tr>
+                <th onclick="sortTable2(0)">Cryptocurrency</th>
+                <th onclick="sortTable2(1)">Quantity</th>
+                <th onclick="sortTable2(2)">$ Dollar Cost Average</th>
+                <th onclick="sortTable2(3)">$ Current price</th>
+                <th onclick="sortTable2(4)">$ Purchase value</th>
+                <th onclick="sortTable2(5)">$ Current value</th>
+                <th onclick="sortTable2(6)">$ Gain</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for coin in grouped_data %}
+            <tr>
+                <td value="{{ quote['data'][coin.coin][0]['name'] }}"><img src="{{ info['data'][coin.coin][0]['logo'] }}" alt="logo" style="width: 24px;height: 24px;">
+                    <span><strong> {{ quote["data"][coin.coin][0]["name"] }}</strong></span><span class="text-muted">  {{ coin.coin }}</span></td>
+                <td value="{{ coin.quantity }}">{{ coin.quantity }}</td>
+                <td value="{{ (coin.price / coin.quantity) }}">{{ (coin.price / coin.quantity) | usd }}</td>
+                <td value="{{ quote['data'][coin.coin][0]['quote']['USD']['price'] }}">{{ quote["data"][coin.coin][0]["quote"]["USD"]["price"] | usd }}</td>
+                <td value="{{ coin.price }}">{{ coin.price | usd }}</td>
+                <td value="{{ (coin.quantity * quote['data'][coin.coin][0]['quote']['USD']['price']) }}">
+                    {{ (coin.quantity * quote["data"][coin.coin][0]["quote"]["USD"]["price"])  | usd }}</td>
+                <td class="gain" value="{{ ((coin.quantity * quote['data'][coin.coin][0]['quote']['USD']['price']) - coin.price) }}">
+                    <strong>{{ ((coin.quantity * quote["data"][coin.coin][0]["quote"]["USD"]["price"]) - coin.price) | usd }}</strong></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="text-center mx-5 my-5">
+    <h4 class="text-start text-decoration-underline py-2">Overall table</h4>
+    <table class="table table-hover table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>$ Total money invested</th>
+                <th>$ Total current value</th>
+                <th>$ Gain</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ combined_data["invested"] | usd }}</td>
+                <td>{{ combined_data["value"] | usd }}</td>
+                <td class="gain" value="{{ combined_data['gain'] }}"><strong>{{ combined_data["gain"] | usd }}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

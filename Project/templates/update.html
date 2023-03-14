@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block title %}
+Update database
+{% endblock %}
+{% block content %}
+
+<div class="border-bottom border-dark text-center mx-5">
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Coin symbol</th>
+                <th>Quantity</th>
+                <th>$ Purchase price</th>
+                <th>Purchase date</th>
+                <th>Service</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <form action="{{ url_for('update_db') }}" method="post">
+                    <td><input autocomplete="off" class="form-control mx-auto w-auto" name="coin" placeholder="Coin symbol" type="text" required></td>
+                    <td><input autocomplete="off" class="form-control mx-auto w-auto" name="quantity" placeholder="Quantity" type="number" step="0.000001" required></td>
+                    <td><input autocomplete="off" class="form-control mx-auto w-auto" name="price" placeholder="$ Price" type="number" step="0.01"></td>
+                    <td><input autocomplete="off" class="form-control mx-auto w-auto" name="date" placeholder="Date" type="date"></td>
+                    <td><input autocomplete="off" class="form-control mx-auto w-auto" name="service" placeholder="Service" type="text"></td>
+                    <td><button class="btn btn-dark" type="submit" name="type" value="">Create</button></td>                    
+                </form>
+            </tr>
+            {% for row in db %}
+            <tr>
+                <form action="{{ url_for('update_db') }}" method="post">
+                    <td><input autocomplete="off" class="form-control mx-auto w-auto" name="coin" value="{{ row.coin }}" type="text" required></td>
+                    <td><input autocomplete="off" class="form-control mx-auto w-auto" name="quantity" value="{{ row.quantity }}" type="number" step="0.000001" required></td>
+                    <td><input autocomplete="off" class="form-control mx-auto w-auto" name="price" value="{{ row.price }}" type="number" step="0.01"></td>
+                    <td><input autocomplete="off" class="form-control mx-auto w-auto" name="date" value="{{ row.date }}" type="date"></td>
+                    <td><input autocomplete="off" class="form-control mx-auto w-auto" name="service" value="{{ row.service }}" type="text"></td>
+                    <td><button class="btn btn-dark" type="submit" name="type" value="{{ row.id }}">Update</button></td>                    
+                </form>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    
+    <div class="my-5 text-center">
+        <p>Coin symbol (eg: BTC for bitcoin) and quantity are required to create the database. If price and date are left blank, database will use data of the current day.</p>
+        <p>For update, if you want to delete a row, set quantity to 0.</p>
+        <p>You can look for cryptocurrencies symbol on <a href="https://coinmarketcap.com/" target="_blank"> CoinMarketCap's website.</a></p>
+    </div>
+
+{% endblock %}
