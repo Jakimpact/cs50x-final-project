@@ -1,7 +1,5 @@
 # Crypto Assets Database
 
-## **Video Demo:** https://youtu.be/HjYULO1KKKw
-
 ## **Website Demo:** https://Jakimpact.eu.pythonanywhere.com
 
 ## **Purpose of the project:**
